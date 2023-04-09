@@ -12,7 +12,7 @@
 A proof of concept for using natural language processing (NLP) to create a documentation assistant that can intelligently respond to user queries. Specifically, I webscraped all of Unreal Engine 5.1's documentation into a single text file to use a dataset for finetuning Meta's llama-7b in [oobabooga's text generation webui](https://github.com/oobabooga/text-generation-webui). I think that locally hosted and trained LoRAs have the potential to be an interesting alternative to OpenAI API calls and vector databases for building context aware assistants for niche tasks and information.
 
 # How to Replicate
-You'll need to have [oobabooga's text generation webui](https://github.com/oobabooga/text-generation-webui) set up, it's a great tool with the goal of being the stable-diffusion-webui equivalent for locally running and training large language models. I suppose you could also train the LoRA some other way, but this is what I used. If you're on windows, the new one-click installer is very helpful. Once you have it up and running, you'll need to pick a base model. I used Llama-7b loaded in 8bit mode, but other models should work. Download the unreal_docs.txt file from this repository and put it in text-generation-webui/training/datasets. Then navigate over to the training tab in the webui and configure the settings: <img src="assets/TrainingSettings.png" width="1200"> 
+You'll need to have [oobabooga's text generation webui](https://github.com/oobabooga/text-generation-webui) set up, it's a great tool with the goal of being the stable-diffusion-webui equivalent for locally running and training large language models. I suppose you could also train the LoRA some other way, but this is what I used. If you're on windows, the new one-click installer is very helpful. Once you have it up and running, you'll need to pick a base model. I used Llama-7b loaded in 8bit mode, but other models should work. Download the unreal_docs.txt file from this repository and put it in text-generation-webui/training/datasets. Then navigate over to the training tab in the webui and configure the settings: <img src="assets/TrainingSettings.PNG" width="1200"> 
 
 These are just the settings I used, I can't say for certain they are the best settings and I plan to continue to experiment with the options. As you can see, training took roughly 8 hours on a 3090ti.
 
@@ -25,7 +25,7 @@ These are just the settings I used, I can't say for certain they are the best se
 I fully expected complete gibberish from the first attempt, but I am pleasantly surprised by the quality of the results:
 | Base Llama7b | ue5-llama-lora | ChatGPT |
 | --- | --- | --- |
-| <img src="assets/BaseLlama7b.png" width="300"> | <img src="assets/ue5Lora.png" width="300"> | <img src="assets/ChatGPT.png" width="300"> |
+| <img src="assets/BaseLlama7b.PNG" width="300"> | <img src="assets/ue5Lora.PNG" width="300"> | <img src="assets/ChatGPT.PNG" width="300"> |
 
 Clearly, base Llama 7b has no idea what's going on and can't provide information about Unreal Engine 5 or it's new features. However, when augmented with ue5-llama-lora, it has no issues generating high quality responses that are clearly derived from Unreal Engine 5.1's up-to-date documentation. While Unreal Engine 5 was released after ChatGPT's training cutoff date, it is impressively familiar with nanite, as nanite had been announced prior to September 2021. ChatGPT fails to recognize mass avoidance in the context of Unreal Engine however, as that is a much newer, experimental feature in the engine.
 
